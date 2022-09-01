@@ -1,10 +1,11 @@
 {
+  "name": "ts-api-boilerplate",
   "bin": {
-    "create-app": "./generate-app.js"
+    "create-app": "./bin/create-app.js"
   },
   "scripts": {
-    "start": "node dist/main/server.js",
-    "dev": "tsx watch src/main/server.ts",
+    "start": "node dist/server.js",
+    "dev": "tsx watch src/server.ts",
     "format": "prettier-standard --format && npx eslint src/** --fix",
     "test": "jest --runInBand --no-cache",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
