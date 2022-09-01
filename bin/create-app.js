@@ -33,7 +33,7 @@ try {
   process.chdir(projectPath)
 
   console.log('Removing useless files')
-  fs.rmdirSync(path.join(currentPath, '.git'), { recursive: true })
+  fs.rmdirSync(path.join(projectPath, '.git'), { recursive: true })
   fs.rmdirSync(path.join(projectPath, 'bin'), { recursive: true })
 
   console.log('The installation is done, this is ready to use !')
