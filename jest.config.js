@@ -1,16 +1,13 @@
 module.exports = {
   bail: true,
   roots: ['<rootDir>/__tests__'],
+  clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: [
-    'src/**/*.ts',
-    '!src/main/**',
-    '!src/**/index.ts'
-  ],
+  collectCoverageFrom: ['src/**/*.ts', '!src/main/**', '!src/**/index.ts'],
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
   transform: {
-    '^.+\\.[tj]s$': ['@swc/jest']
+    '^.+\\.ts$': '@swc/jest'
   },
   moduleNameMapper: {
     '@/tests/(.*)': '<rootDir>/__tests__/$1',

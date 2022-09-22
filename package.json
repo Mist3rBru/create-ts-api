@@ -5,6 +5,7 @@
   "bin": {
     "create-app": "./bin/create-app.js"
   },
+  "license": "MIT",
   "scripts": {
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
@@ -27,8 +28,9 @@
     "@typescript-eslint/parser": "^5.36.1",
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-config-standard-with-typescript": "^22.0.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
     "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-jest": "^27.0.4",
     "eslint-plugin-n": "^15.0.0",
     "eslint-plugin-promise": "^6.0.0",
     "git-commit-msg-linter": "^4.1.3",

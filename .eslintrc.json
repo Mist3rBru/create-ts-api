@@ -1,7 +1,8 @@
 {
   "env": {
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
   "extends": ["standard-with-typescript", "prettier"],
   "parser": "@typescript-eslint/parser",
@@ -20,6 +21,16 @@
     "@typescript-eslint/method-signature-style": "off",
     "@typescript-eslint/no-namespace": "off",
     "import/export": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["__tests__/**"],
+      "plugins": ["@typescript-eslint", "jest"],
+      "extends": ["standard", "prettier", "plugin:jest/recommended"],
+      "rules": {
+        "no-use-before-define": "off"
+      }
+    }
+  ]
 }
 
