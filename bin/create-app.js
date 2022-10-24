@@ -37,7 +37,7 @@ try {
   fs.rmSync(path.join(projectPath, 'bin'), { recursive: true })
   fs.rmSync(path.join(projectPath, 'README.md'), { recursive: true })
 
-  console.log('The installation is done, this is ready to use !')
+  console.log('The installation is done, it is ready to use !!!')
 } catch (error) {
   console.log(error)
 }

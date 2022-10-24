@@ -1,9 +1,8 @@
 .env
 yarn.lock
 package-lock.json
+pnpm-lock.yaml
 
-.vscode/
 node_modules/
 coverage/
 dist/
-out/

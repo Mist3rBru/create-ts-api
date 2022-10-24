@@ -3,7 +3,7 @@ module.exports = {
   roots: ['<rootDir>/__tests__'],
   clearMocks: true,
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.ts', '!src/main/**', '!src/**/index.ts'],
+  collectCoverageFrom: ['src/**/*.ts'],
   coverageDirectory: 'coverage',
   testEnvironment: 'node',
   transform: {

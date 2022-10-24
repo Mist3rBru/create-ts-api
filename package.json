@@ -9,13 +9,13 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
-    "format": "prettier-standard --format && npx eslint src/** --fix",
+    "format": "prettier --write . && eslint . --fix",
     "test": "jest --runInBand --no-cache",
-    "test:unit": "npm test -- --watch -c jest-unit-config.js",
-    "test:int": "npm test -- --watch -c jest-integration-config.js",
+    "test:w": "npm test -- --watch",
     "test:ci": "npm test -- --silent --coverage",
-    "build": "rimraf dist && tsc -p tsconfig-build.json",
-    "build:watch": "npm run build -- -w"
+    "prebuild": "rimraf dist",
+    "build": "tsc -p tsconfig.build.json",
+    "build:w": "npm run build -- -w"
   },
   "dependencies": {},
   "devDependencies": {
