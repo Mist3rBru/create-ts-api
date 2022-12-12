@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
+    "target": "es6",
     "outDir": "dist",
     "module": "commonjs",
-    "target": "ES2017",
+    "moduleResolution": "node",
     "esModuleInterop": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": "src",
     "paths": {
       "@/tests/*": ["../__tests__/*"],
       "@/*": ["*"]
     }
-  },
+  }
 }

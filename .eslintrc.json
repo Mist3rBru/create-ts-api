@@ -16,8 +16,25 @@
   "rules": {
     "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
-    "@typescript-eslint/method-signature-style": "off",
+    "@typescript-eslint/restrict-template-expressions": [
+      "error",
+      { "allowNullish": true }
+    ],
+    "@typescript-eslint/prefer-nullish-coalescing": [
+      "error",
+      {
+        "ignoreConditionalTests": true,
+        "ignoreMixedLogicalExpressions": true
+      }
+    ],
+    "@typescript-eslint/method-signature-style": ["error", "method"],
+    "@typescript-eslint/space-before-function-paren": [
+      "error",
+      { "named": "never" }
+    ],
     "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/indent": "off",
+    "brace-style": ["error", "1tbs", { "allowSingleLine": false }],
     "multiline-ternary": "off",
     "import/export": "off"
   },
@@ -30,6 +47,7 @@
         "jest/prefer-lowercase-title": "off",
         "jest/prefer-expect-assertions": "off",
         "jest/require-to-throw-message": "off",
+        "jest/unbound-method": "off",
         "jest/no-hooks": "off",
         "jest/max-expects": ["error", { "max": 10 }]
       }
