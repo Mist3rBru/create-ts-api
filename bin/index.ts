@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { cleanProject, cloneRepository, createProject } from './cmd'
+import { cleanProject, cloneRepository, createProject, installDependencies } from './cmd'
 
 async function main() {
   if (process.argv.length < 3) {
@@ -14,6 +14,9 @@ async function main() {
 
   console.log('Downloading files...')
   await cloneRepository()
+
+  console.log('Installing dependencies...')
+  await installDependencies()
 
   console.log('Removing useless files...')
   await cleanProject()

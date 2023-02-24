@@ -12,11 +12,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 14.x
+          cache: "pnpm"
 
-      - run: npm install
-      - run: npm run tsc
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm build
       - run: npm link
       - run: npx create-ts-api my-app

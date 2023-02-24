@@ -50,3 +50,13 @@ export async function cleanProject() {
     await deleteItem(projectPath, toDelete)
   }
 }
+
+export async function installDependencies() {
+  try {
+    await exec('npm install -g pnpm@latest')
+    await exec(`cd ${projectPath}`)
+    await exec('pnpm install')
+  } catch (error) {
+    await rollback(error)
+  }
+}
