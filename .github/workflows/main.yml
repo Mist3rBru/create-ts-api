@@ -20,7 +20,7 @@ jobs:
           node-version: 14.x
           cache: "pnpm"
 
-      - run: pnpm install --frozen-lockfile
+      - run: pnpm install
       - run: pnpm lint
       - run: pnpm build
       - run: npm link
