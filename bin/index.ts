@@ -1,7 +1,7 @@
 #!/usr/bin/env node
-const { createProject, cloneRepository, clearProject,  } = require('./cmd')
+import { createProject, cloneRepository, cleanProject } from './cmd'
 
-;(async () => {
+void (async () => {
   if (process.argv.length < 3) {
     console.log('You have to provide a name to your app.')
     console.log('For example :')
@@ -15,8 +15,8 @@ const { createProject, cloneRepository, clearProject,  } = require('./cmd')
   console.log('Downloading files...')
   await cloneRepository()
 
-  console.log('Removing useless files')
-  await clearProject()
+  console.log('Removing useless files...')
+  await cleanProject()
 
   console.log('The installation is done, it is ready to use !!!')
 })()

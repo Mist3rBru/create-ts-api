@@ -1,17 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "ES6",
     "outDir": "dist",
-    "module": "commonjs",
+    "module": "NodeNext",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
+    "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "src",
+    "useUnknownInCatchVariables": false,
+    "strictPropertyInitialization": false,
+    "baseUrl": ".",
     "paths": {
-      "@/tests/*": ["../__tests__/*"],
-      "@/*": ["*"]
+      "@/tests/*": ["__tests__/*"],
+      "@/*": ["src/*"]
     }
   }
 }
