@@ -19,7 +19,7 @@
     "test": "jest --no-cache",
     "test:w": "npm test -- --watch",
     "test:ci": "npm test -- --silent --coverage",
-    "publish": "npm publish",
+    "publish": "changeset publish",
     "release": "run-s lint build publish"
   },
   "dependencies": {
