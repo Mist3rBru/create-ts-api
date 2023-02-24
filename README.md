@@ -27,5 +27,5 @@
 ## Usage
 After installation just run the following command whenever you want to create a new project with all setup just setted 
 ```bash
-  npx create-app my-app;
+  npx create-ts-api my-app;
 ```

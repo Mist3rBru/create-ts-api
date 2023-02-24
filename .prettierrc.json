@@ -8,5 +8,20 @@
   "trailingComma": "none",
   "tabWidth": 2,
   "printWidth": 80,
-  "plugins": ["prettier-plugin-organize-imports"]
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": [
+    "(module-alias|dotenv)",
+    "^@/domain",
+    "^@/presentation",
+    "^@/services",
+    "^@/infra",
+    "^@/main",
+    "^@/tests",
+    "^@(.*)",
+    "^node",
+    "<THIRD_PARTY_MODULES>",
+    "^[./]"
+  ],
+  "importOrderSeparation": false,
+  "importOrderSortSpecifiers": true
 }

@@ -1,4 +1,8 @@
-node_modules/
 coverage/
-public/
 dist/
+node_modules/
+public/
+
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

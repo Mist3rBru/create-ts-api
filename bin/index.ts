@@ -1,11 +1,11 @@
 #!/usr/bin/env node
-const { createProject, cloneRepository, clearProject,  } = require('./cmd')
+import { cleanProject, cloneRepository, createProject } from './cmd'
 
-;(async () => {
+async function main() {
   if (process.argv.length < 3) {
     console.log('You have to provide a name to your app.')
     console.log('For example :')
-    console.log('    npx create-app my-app')
+    console.log('    npx create-ts-api my-app')
     process.exit(1)
   }
 
@@ -15,8 +15,10 @@ const { createProject, cloneRepository, clearProject,  } = require('./cmd')
   console.log('Downloading files...')
   await cloneRepository()
 
-  console.log('Removing useless files')
-  await clearProject()
+  console.log('Removing useless files...')
+  await cleanProject()
 
   console.log('The installation is done, it is ready to use !!!')
-})()
+}
+
+void main()
