@@ -1,6 +1,8 @@
 {
   "version": "0.0.1",
-  "name": "create-ts-api",
+  "name": "@mist3rbru/create-ts-api",
+  "access": "public",
+  "private": false,
   "description": "🎉Enjoy your template🎉",
   "bin": {
     "create-ts-api": "./dist/bin/index.js"

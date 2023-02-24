@@ -45,7 +45,7 @@ export async function cloneRepository() {
 }
 
 export async function cleanProject() {
-  const toDeleteList = ['.git', '.github', 'bin', 'README.md']
+  const toDeleteList = ['.git', '.github', '.changeset', 'bin', 'README.md']
   for (const toDelete of toDeleteList) {
     await deleteItem(projectPath, toDelete)
   }
