@@ -1,5 +1,10 @@
 #!/usr/bin/env node
-import { cleanProject, cloneRepository, createProject, installDependencies } from './cmd'
+import {
+  cleanProject,
+  cloneRepository,
+  createProject,
+  installDependencies
+} from './cmd'
 
 async function main() {
   if (process.argv.length < 3) {
