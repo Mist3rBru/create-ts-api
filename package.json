@@ -18,7 +18,9 @@
     "build": "run-s clean tsc",
     "test": "jest --no-cache",
     "test:w": "npm test -- --watch",
-    "test:ci": "npm test -- --silent --coverage"
+    "test:ci": "npm test -- --silent --coverage",
+    "publish": "npm publish",
+    "release": "run-s lint build publish"
   },
   "dependencies": {
     "dotenv": "^16.0.3",
