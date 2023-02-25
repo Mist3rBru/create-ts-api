@@ -5,32 +5,37 @@ import {
   createMissingFiles,
   createProject,
   formatProject,
-  rollback
+  rollback,
+  print
 } from './cmd'
 
 async function main() {
+  const timeLabel = '🚀 Built in'
+  console.time(timeLabel)
   if (process.argv.length < 3) {
-    console.log('You have to provide a name to your app.')
-    console.log('For example :')
-    console.log('    npx create-ts-api my-app')
+    print('You have to provide a name to your app.')
+    print('For example :')
+    print('    npx create-ts-api my-app')
     process.exit(1)
   }
 
   try {
-    console.log('Creating project...')
+    print('Creating project...')
     await createProject()
 
-    console.log('Downloading files...')
+    print('Downloading files...')
     await cloneRepository()
     await createMissingFiles()
 
-    console.log('Removing useless files...')
+    print('Removing useless files...')
     await cleanProject()
 
-    console.log('Formatting project ...')
+    print('Formatting project ...')
     await formatProject()
 
-    console.log('The installation is done, it is ready to use !!!')
+    print('The installation is done, it is ready to use !!!')
+    console.timeEnd(timeLabel)
+    process.stdout.write('\n')
   } catch (error) {
     await rollback(error)
   }

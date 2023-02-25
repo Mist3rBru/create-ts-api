@@ -7,7 +7,12 @@
   "bin": {
     "create-ts-api": "./dist/index.js"
   },
+  "author": "Mist3rBru",
   "license": "MIT",
+  "homepage": "https://github.com/Mist3rBru/create-ts-api#readme",
+  "repository": {
+    "url": "https://github.com/Mist3rBru/create-ts-api.git"
+  },
   "scripts": {
     "lint": "tsc && prettier --write .",
     "clean": "rimraf dist my-app",

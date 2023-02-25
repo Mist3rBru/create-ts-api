@@ -10,8 +10,12 @@ const currentPath = process.cwd()
 const projectPath = join(currentPath, projectName)
 const gitRepo = 'https://github.com/Mist3rBru/create-ts-api.git'
 
+export function print(msg: string) {
+  process.stdout.write(`> ${msg}\n`)
+}
+
 export async function rollback(error: Error): Promise<never> {
-  console.error('An error ocurred, rolling back process...')
+  print('An error ocurred, rolling back process...')
   console.error(error)
   await deleteItem(currentPath, projectName)
   process.exit(1)
@@ -27,7 +31,7 @@ export async function createProject(): Promise<void> {
     await mkdir(projectPath)
   } catch (error) {
     if (error.code === 'EEXIST') {
-      console.log(
+      print(
         `The folder ${projectName} already exist in the current directory, please give it another name.`
       )
       process.exit(1)
