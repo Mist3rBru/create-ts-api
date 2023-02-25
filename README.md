@@ -16,21 +16,9 @@
   - [Prettier](https://prettier.io/)
   - [Git Commit Message Linter](https://github.com/legend80s/commit-msg-linter)
 
-## Installation
-
-```bash
-  # Clone repository
-  git clone https://github.com/Mist3rBru/ts-api-template.git;
-
-  cd ts-api-template; # Access project
-
-  npm link; # Create a link to project with npm;
-```
-
 ## Usage
-
-After installation just run the following command whenever you want to create a new project with all setup just setted
-
 ```bash
+  npm install @mist3rbru/create-ts-api --global;
+  
   npx create-ts-api my-app;
 ```
