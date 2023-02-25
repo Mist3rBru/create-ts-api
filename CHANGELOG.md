@@ -1,5 +1,11 @@
 # create-ts-api
 
+## 0.0.3
+
+### Patch Changes
+
+- 8189ec4: unlink api files from project files
+
 ## 0.0.2
 
 ### Patch Changes
