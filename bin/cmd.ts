@@ -69,11 +69,7 @@ export async function cleanProject(): Promise<void> {
   }
 }
 
-export async function installDependencies(): Promise<void> {
-  await exec('npm install -g pnpm@latest')
-  await exec(`cd ${projectPath} && pnpm install`)
-}
-
 export async function formatProject(): Promise<void> {
-  await exec(`cd ${projectPath} && pnpm prettier --write .`)
+  await exec(`npm install -g prettier@latest`)
+  await exec(`cd ${projectPath} && prettier --write .`)
 }

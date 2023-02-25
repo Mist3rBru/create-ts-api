@@ -4,7 +4,6 @@ import {
   cloneRepository,
   createMissingFiles,
   createProject,
-  installDependencies,
   formatProject,
   rollback
 } from './cmd'
@@ -24,9 +23,6 @@ async function main() {
     console.log('Downloading files...')
     await cloneRepository()
     await createMissingFiles()
-
-    console.log('Installing dependencies...')
-    await installDependencies()
 
     console.log('Removing useless files...')
     await cleanProject()
