@@ -1,5 +1,5 @@
 import child from 'node:child_process'
-import { mkdir, rm } from 'node:fs/promises'
+import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { promisify } from 'node:util'
 
@@ -10,18 +10,19 @@ const currentPath = process.cwd()
 const projectPath = join(currentPath, projectName)
 const gitRepo = 'https://github.com/Mist3rBru/create-ts-api.git'
 
-async function rollback(error: Error): Promise<never> {
+export async function rollback(error: Error): Promise<never> {
+  console.error('An error ocurred, rolling back process...')
   console.error(error)
   await deleteItem(currentPath, projectName)
   process.exit(1)
 }
 
-async function deleteItem(folder: string, item: string) {
+async function deleteItem(folder: string, item: string): Promise<void> {
   const itemPath = join(folder, item)
   await rm(itemPath, { recursive: true })
 }
 
-export async function createProject() {
+export async function createProject(): Promise<void> {
   try {
     await mkdir(projectPath)
   } catch (error) {
@@ -36,27 +37,38 @@ export async function createProject() {
   }
 }
 
-export async function cloneRepository() {
-  try {
-    await exec(`git clone --depth 1 ${gitRepo} ${projectPath}`)
-  } catch (error) {
-    await rollback(error)
+export async function cloneRepository(): Promise<void> {
+  await exec(`git clone --depth 1 ${gitRepo} ${projectPath}`)
+}
+
+export async function createMissingFiles() {
+  const missingFiles: Record<string, Record<string, string>> = require(join(
+    projectPath,
+    'missing-files.json'
+  ))
+  const config = Object.entries(missingFiles)
+  for (const [file, content] of config) {
+    await writeFile(join(projectPath, file), JSON.stringify(content), {
+      encoding: 'utf8'
+    })
   }
 }
 
-export async function cleanProject() {
-  const toDeleteList = ['.git', '.github', '.changeset', 'bin', 'README.md']
+export async function cleanProject(): Promise<void> {
+  const toDeleteList = [
+    '.git',
+    '.changeset',
+    '.github',
+    'bin',
+    'CHANGELOG.md',
+    'README.md'
+  ]
   for (const toDelete of toDeleteList) {
     await deleteItem(projectPath, toDelete)
   }
 }
 
-export async function installDependencies() {
-  try {
-    await exec('npm install -g pnpm@latest')
-    await exec(`cd ${projectPath}`)
-    await exec('pnpm install')
-  } catch (error) {
-    await rollback(error)
-  }
+export async function installDependencies(): Promise<void> {
+  await exec('npm install -g pnpm@latest')
+  await exec(`cd ${projectPath} && pnpm install`)
 }

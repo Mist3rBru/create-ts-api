@@ -6,13 +6,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
+    "noEmit": true,
     "forceConsistentCasingInFileNames": true,
-    "useUnknownInCatchVariables": false,
-    "strictPropertyInitialization": false,
-    "baseUrl": ".",
-    "paths": {
-      "@/tests/*": ["__tests__/*"],
-      "@/*": ["src/*"]
-    }
+    "useUnknownInCatchVariables": false
   }
 }

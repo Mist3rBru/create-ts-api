@@ -2,8 +2,10 @@
 import {
   cleanProject,
   cloneRepository,
+  createMissingFiles,
   createProject,
-  installDependencies
+  installDependencies,
+  rollback
 } from './cmd'
 
 async function main() {
@@ -14,19 +16,24 @@ async function main() {
     process.exit(1)
   }
 
-  console.log('Creating project...')
-  await createProject()
+  try {
+    console.log('Creating project...')
+    await createProject()
 
-  console.log('Downloading files...')
-  await cloneRepository()
+    console.log('Downloading files...')
+    await cloneRepository()
+    await createMissingFiles()
 
-  console.log('Installing dependencies...')
-  await installDependencies()
+    console.log('Installing dependencies...')
+    await installDependencies()
 
-  console.log('Removing useless files...')
-  await cleanProject()
+    console.log('Removing useless files...')
+    await cleanProject()
 
-  console.log('The installation is done, it is ready to use !!!')
+    console.log('The installation is done, it is ready to use !!!')
+  } catch (error) {
+    await rollback(error)
+  }
 }
 
 void main()
