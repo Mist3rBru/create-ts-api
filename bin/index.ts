@@ -5,6 +5,7 @@ import {
   createMissingFiles,
   createProject,
   installDependencies,
+  formatProject,
   rollback
 } from './cmd'
 
@@ -29,6 +30,9 @@ async function main() {
 
     console.log('Removing useless files...')
     await cleanProject()
+
+    console.log('Formatting project ...')
+    await formatProject()
 
     console.log('The installation is done, it is ready to use !!!')
   } catch (error) {

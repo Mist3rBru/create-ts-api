@@ -20,8 +20,4 @@ jobs:
           node-version: 14.x
           cache: 'pnpm'
 
-      - run: pnpm install
-      - run: pnpm lint
-      - run: pnpm build
-      - run: npm link
-      - run: npx create-ts-api my-app
+      - run: pnpm ci

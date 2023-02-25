@@ -61,7 +61,8 @@ export async function cleanProject(): Promise<void> {
     '.github',
     'bin',
     'CHANGELOG.md',
-    'README.md'
+    'README.md',
+    'missing-files.json'
   ]
   for (const toDelete of toDeleteList) {
     await deleteItem(projectPath, toDelete)
@@ -71,4 +72,8 @@ export async function cleanProject(): Promise<void> {
 export async function installDependencies(): Promise<void> {
   await exec('npm install -g pnpm@latest')
   await exec(`cd ${projectPath} && pnpm install`)
+}
+
+export async function formatProject(): Promise<void> {
+  await exec(`cd ${projectPath} && pnpm prettier --write .`)
 }
