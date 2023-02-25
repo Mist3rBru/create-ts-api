@@ -17,8 +17,9 @@
   - [Git Commit Message Linter](https://github.com/legend80s/commit-msg-linter)
 
 ## Usage
+
 ```bash
   npm install @mist3rbru/create-ts-api --global;
-  
+
   npx create-ts-api my-app;
 ```

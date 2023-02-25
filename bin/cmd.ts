@@ -2,6 +2,7 @@ import child from 'node:child_process'
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { promisify } from 'node:util'
+import { configFiles } from './config-files'
 
 const exec = promisify(child.exec)
 
@@ -46,11 +47,7 @@ export async function cloneRepository(): Promise<void> {
 }
 
 export async function createMissingFiles() {
-  const missingFiles: Record<string, Record<string, string>> = require(join(
-    projectPath,
-    'missing-files.json'
-  ))
-  const config = Object.entries(missingFiles)
+  const config = Object.entries(configFiles)
   for (const [file, content] of config) {
     await writeFile(join(projectPath, file), JSON.stringify(content), {
       encoding: 'utf8'
@@ -66,7 +63,7 @@ export async function cleanProject(): Promise<void> {
     'bin',
     'CHANGELOG.md',
     'README.md',
-    'missing-files.json'
+    'pnpm-lock.yaml'
   ]
   for (const toDelete of toDeleteList) {
     await deleteItem(projectPath, toDelete)
