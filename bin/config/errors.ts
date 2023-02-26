@@ -8,11 +8,12 @@ export class InvalidFolderError extends Error {
 
 export class InvalidCreateCommand extends Error {
   constructor() {
-    const message = `
-      You have to provide a name to your app.
-      For example :
-          > npx create-ts-api my-app;
-    `
+    const message: string = [
+      'You must provide a name to your app.',
+      '  For example :',
+      '    > npx create-ts-api my-app;',
+      ''
+    ].join('\n')
     super(message)
     this.name = 'InvalidCreateCommand'
   }

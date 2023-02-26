@@ -9,8 +9,6 @@ import {
   InvalidCreateCommand
 } from './config'
 
-type ValidArgs = [npx: 'npx', command: 'create-ts-api', project: string]
-
 interface Project {
   name: string
   root: string
@@ -35,7 +33,9 @@ export class CMD {
   }
 
   private errorHandler(error: Error): never {
-    console.error(error)
+    process.stdout.write(`${error.name}: `)
+    process.stdout.write(error.message)
+    process.stdout.write('\n')
     process.exit(1)
   }
 

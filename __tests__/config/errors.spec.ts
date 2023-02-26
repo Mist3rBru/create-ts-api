@@ -1,4 +1,3 @@
-/* eslint-disable jest/require-hook */
 import * as Errors from '@/config/errors'
 
 type ConstructorCall<T> = T extends new (arg: infer P) => any
@@ -9,7 +8,7 @@ type ConstructorCall<T> = T extends new (arg: infer P) => any
 
 type TError = typeof Errors
 
-type Mock = Array<
+type Mock = UnionToTuple<
   {
     [K in keyof TError]: [K, ConstructorCall<TError[K]>]
   }[keyof TError]
@@ -17,8 +16,8 @@ type Mock = Array<
 
 describe('CustomError', () => {
   const mock: Mock = [
-    ['InvalidCreateCommand', undefined],
-    ['InvalidFolderError', 'folder']
+    ['InvalidFolderError', 'folder'],
+    ['InvalidCreateCommand', undefined]
   ]
 
   mock.forEach(([err, param]) => {

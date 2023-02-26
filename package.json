@@ -15,7 +15,7 @@
   },
   "scripts": {
     "lint": "tsc && prettier --write .",
-    "clean": "rimraf dist my-app",
+    "clean": "rimraf coverage dist my-app",
     "build": "tsup bin",
     "pkg:unlink": "npm unlink --force",
     "pkg:link": "npm link",

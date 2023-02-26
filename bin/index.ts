@@ -14,14 +14,12 @@ async function main() {
     cmd.print('Creating project...')
     await cmd.createProject()
 
-    cmd.print('Downloading files...')
+    cmd.print('Creating files...')
     await cmd.cloneRepository()
     await cmd.createMissingFiles()
-
-    cmd.print('Removing useless files...')
     await cmd.cleanProject()
 
-    cmd.print('Formatting project ...')
+    cmd.print('Formatting files...')
     await cmd.formatProject()
 
     cmd.print('The installation is done, it is ready to use !!!')
