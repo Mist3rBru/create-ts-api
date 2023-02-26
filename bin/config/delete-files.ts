@@ -1,4 +1,5 @@
 export const toDeleteList: string[] = [
+  '__tests__',
   '.git',
   '.changeset',
   '.github',

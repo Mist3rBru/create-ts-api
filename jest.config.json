@@ -1,0 +1,16 @@
+{
+  "bail": true,
+  "roots": ["<rootDir>/__tests__"],
+  "clearMocks": true,
+  "maxWorkers": 1,
+  "collectCoverage": false,
+  "collectCoverageFrom": ["bin/**/*.ts"],
+  "coverageDirectory": "coverage",
+  "testEnvironment": "node",
+  "transform": { "^.+\\.(t|j)sx?$": "@swc/jest" },
+  "moduleNameMapper": {
+    "@/tests/(.*)": "<rootDir>/__tests__/$1",
+    "@/(.*)": "<rootDir>/bin/$1"
+  },
+  "testRegex": ["__tests__/.+(spec|test).ts"]
+}
