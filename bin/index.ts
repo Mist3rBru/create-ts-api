@@ -1,44 +1,36 @@
 #!/usr/bin/env node
-import {
-  cleanProject,
-  cloneRepository,
-  createMissingFiles,
-  createProject,
-  formatProject,
-  rollback,
-  print
-} from './cmd'
+import { CMD } from './cmd'
 
 async function main() {
+  const cmd = new CMD({
+    name: process.argv[2],
+    root: process.cwd()
+  })
+
   const timeLabel = '🚀 Built in'
   console.time(timeLabel)
-  if (process.argv.length < 3) {
-    print('You have to provide a name to your app.')
-    print('For example :')
-    print('    npx create-ts-api my-app')
-    process.exit(1)
-  }
 
   try {
-    print('Creating project...')
-    await createProject()
+    cmd.print('Creating project...')
+    await cmd.createProject()
 
-    print('Downloading files...')
-    await cloneRepository()
-    await createMissingFiles()
+    cmd.print('Downloading files...')
+    await cmd.cloneRepository()
+    await cmd.createMissingFiles()
 
-    print('Removing useless files...')
-    await cleanProject()
+    cmd.print('Removing useless files...')
+    await cmd.cleanProject()
 
-    print('Formatting project ...')
-    await formatProject()
+    cmd.print('Formatting project ...')
+    await cmd.formatProject()
 
-    print('The installation is done, it is ready to use !!!')
-    console.timeEnd(timeLabel)
+    cmd.print('The installation is done, it is ready to use !!!')
     process.stdout.write('\n')
   } catch (error) {
-    await rollback(error)
+    await cmd.rollback(error)
   }
+
+  console.timeEnd(timeLabel)
 }
 
 void main()

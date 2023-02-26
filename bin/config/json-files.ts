@@ -1,4 +1,4 @@
-export const configFiles = {
+export const jsonFiles: Record<string, Record<string, any>> = {
   'package.json': {
     version: '0.0.1',
     name: '@mist3rbru/create-ts-api',

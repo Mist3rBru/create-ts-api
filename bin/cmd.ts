@@ -1,76 +1,87 @@
-import child from 'node:child_process'
+import { exec as execCallback } from 'node:child_process'
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { promisify } from 'node:util'
-import { configFiles } from './config-files'
+import {
+  toDeleteList,
+  jsonFiles,
+  InvalidFolderError,
+  InvalidCreateCommand
+} from './config'
 
-const exec = promisify(child.exec)
+type ValidArgs = [npx: 'npx', command: 'create-ts-api', project: string]
 
-const projectName = process.argv[2]
-const currentPath = process.cwd()
-const projectPath = join(currentPath, projectName)
-const gitRepo = 'https://github.com/Mist3rBru/create-ts-api.git'
-
-export function print(msg: string) {
-  process.stdout.write(`> ${msg}\n`)
+interface Project {
+  name: string
+  root: string
+  path: string
 }
 
-export async function rollback(error: Error): Promise<never> {
-  print('An error ocurred, rolling back process...')
-  console.error(error)
-  await deleteItem(currentPath, projectName)
-  process.exit(1)
-}
+export class CMD {
+  private readonly exec = promisify(execCallback)
+  private readonly gitRepo = 'https://github.com/Mist3rBru/create-ts-api.git'
+  private readonly project: Project
 
-async function deleteItem(folder: string, item: string): Promise<void> {
-  const itemPath = join(folder, item)
-  await rm(itemPath, { recursive: true })
-}
+  constructor(project: Omit<Project, 'path'>) {
+    if (!project.name) {
+      this.errorHandler(new InvalidCreateCommand())
+    }
 
-export async function createProject(): Promise<void> {
-  try {
-    await mkdir(projectPath)
-  } catch (error) {
-    if (error.code === 'EEXIST') {
-      print(
-        `The folder ${projectName} already exist in the current directory, please give it another name.`
-      )
-      process.exit(1)
-    } else {
-      await rollback(error)
+    this.project = {
+      name: project.name,
+      root: project.root,
+      path: join(project.root, project.name)
     }
   }
-}
 
-export async function cloneRepository(): Promise<void> {
-  await exec(`git clone --depth 1 ${gitRepo} ${projectPath}`)
-}
+  private errorHandler(error: Error): never {
+    console.error(error)
+    process.exit(1)
+  }
 
-export async function createMissingFiles() {
-  const config = Object.entries(configFiles)
-  for (const [file, content] of config) {
-    await writeFile(join(projectPath, file), JSON.stringify(content), {
-      encoding: 'utf8'
+  print(msg: string): void {
+    process.stdout.write(`> ${msg}\n`)
+  }
+
+  async rollback(error: Error): Promise<never> {
+    this.print('An error ocurred, rolling back process...')
+    await this.deleteItem(this.project.root, this.project.name)
+    this.errorHandler(error)
+  }
+
+  async deleteItem(folder: string, item: string): Promise<void> {
+    await rm(join(folder, item), { recursive: true })
+  }
+
+  async createProject(): Promise<void> {
+    mkdir(this.project.path).catch(error => {
+      if (error.code === 'EEXIST') {
+        this.errorHandler(new InvalidFolderError(this.project.name))
+      } else {
+        this.errorHandler(error)
+      }
     })
   }
-}
 
-export async function cleanProject(): Promise<void> {
-  const toDeleteList = [
-    '.git',
-    '.changeset',
-    '.github',
-    'bin',
-    'CHANGELOG.md',
-    'README.md',
-    'pnpm-lock.yaml'
-  ]
-  for (const toDelete of toDeleteList) {
-    await deleteItem(projectPath, toDelete)
+  async cloneRepository(): Promise<void> {
+    await this.exec(`git clone --depth 1 ${this.gitRepo} ${this.project.path}`)
   }
-}
 
-export async function formatProject(): Promise<void> {
-  await exec(`npm install -g prettier@latest`)
-  await exec(`cd ${projectPath} && prettier --write .`)
+  async createMissingFiles() {
+    const jsonEntries = Object.entries(jsonFiles)
+    for (const [file, content] of jsonEntries) {
+      await writeFile(join(this.project.path, file), JSON.stringify(content))
+    }
+  }
+
+  async cleanProject(): Promise<void> {
+    for (const toDelete of toDeleteList) {
+      await this.deleteItem(this.project.path, toDelete)
+    }
+  }
+
+  async formatProject(): Promise<void> {
+    await this.exec(`npm install -g prettier@latest`)
+    await this.exec(`cd ${this.project.path} && prettier --write .`)
+  }
 }
