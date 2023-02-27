@@ -9,18 +9,12 @@ import {
   InvalidCreateCommand
 } from './config'
 
-interface Project {
-  name: string
-  root: string
-  path: string
-}
-
 export class CMD {
-  private readonly exec = promisify(execCallback)
-  private readonly gitRepo = 'https://github.com/Mist3rBru/create-ts-api.git'
-  private readonly project: Project
+  readonly exec = promisify(execCallback)
+  readonly gitRepo = 'https://github.com/Mist3rBru/create-ts-api.git'
+  readonly project: CMD.Project
 
-  constructor(project: Omit<Project, 'path'>) {
+  constructor(project: Omit<CMD.Project, 'path'>) {
     if (!project.name) {
       this.errorHandler(new InvalidCreateCommand())
     }
@@ -32,7 +26,7 @@ export class CMD {
     }
   }
 
-  private errorHandler(error: Error): never {
+  errorHandler(error: Error): never {
     process.stdout.write(`${error.name}: `)
     process.stdout.write(error.message)
     process.stdout.write('\n')
@@ -55,11 +49,9 @@ export class CMD {
 
   async createProject(): Promise<void> {
     mkdir(this.project.path).catch(error => {
-      if (error.code === 'EEXIST') {
-        this.errorHandler(new InvalidFolderError(this.project.name))
-      } else {
-        this.errorHandler(error)
-      }
+      error.code === 'EEXIST'
+        ? this.errorHandler(new InvalidFolderError(this.project.name))
+        : this.errorHandler(error)
     })
   }
 
@@ -83,5 +75,13 @@ export class CMD {
   async formatProject(): Promise<void> {
     await this.exec(`npm install -g prettier@latest`)
     await this.exec(`cd ${this.project.path} && prettier --write .`)
+  }
+}
+
+export namespace CMD {
+  export interface Project {
+    name: string
+    root: string
+    path: string
   }
 }
