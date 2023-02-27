@@ -6,7 +6,7 @@ export class InvalidFolderError extends Error {
   }
 }
 
-export class InvalidCreateCommand extends Error {
+export class InvalidCreateCommandError extends Error {
   constructor() {
     const message: string = [
       'You must provide a name to your app.',
@@ -15,6 +15,6 @@ export class InvalidCreateCommand extends Error {
       ''
     ].join('\n')
     super(message)
-    this.name = 'InvalidCreateCommand'
+    this.name = 'InvalidCreateCommandError'
   }
 }

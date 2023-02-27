@@ -6,7 +6,7 @@ import {
   toDeleteList,
   jsonFiles,
   InvalidFolderError,
-  InvalidCreateCommand
+  InvalidCreateCommandError
 } from './config'
 
 export class CMD {
@@ -16,7 +16,7 @@ export class CMD {
 
   constructor(project: Omit<CMD.Project, 'path'>) {
     if (!project.name) {
-      this.errorHandler(new InvalidCreateCommand())
+      this.errorHandler(new InvalidCreateCommandError())
     }
 
     this.project = {

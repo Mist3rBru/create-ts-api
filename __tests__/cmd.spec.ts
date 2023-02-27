@@ -1,6 +1,6 @@
 import { CMD } from '@/cmd'
 import {
-  InvalidCreateCommand,
+  InvalidCreateCommandError,
   InvalidFolderError,
   jsonFiles,
   toDeleteList
@@ -48,7 +48,7 @@ describe('CMD', () => {
   describe('constructor()', () => {
     it('should print error message', async () => {
       const sut = makeSut({ name: '', root: '~' })
-      const error = new InvalidCreateCommand()
+      const error = new InvalidCreateCommandError()
 
       expect(sut).toBeInstanceOf(CMD)
       expect(stdoutSpy).toHaveBeenCalledWith(`${error.name}: `)
