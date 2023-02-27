@@ -1,5 +1,3 @@
-import fs from 'node:fs/promises'
-import child, { ChildProcess, ExecException } from 'node:child_process'
 import { CMD } from '@/cmd'
 import {
   InvalidCreateCommand,
@@ -8,6 +6,8 @@ import {
   toDeleteList
 } from '@/config'
 import { faker } from '@faker-js/faker'
+import child, { ChildProcess, ExecException } from 'node:child_process'
+import fs from 'node:fs/promises'
 import { join } from 'node:path'
 
 const makeSut = (props: Omit<CMD.Project, 'path'>): CMD => {
