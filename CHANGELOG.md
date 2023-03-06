@@ -1,5 +1,11 @@
 # create-ts-api
 
+## 0.1.1
+
+### Patch Changes
+
+- ed8669b: fix: not auto executing
+
 ## 0.1.0
 
 ### Minor Changes
