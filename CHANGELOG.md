@@ -1,5 +1,11 @@
 # create-ts-api
 
+## 0.1.0
+
+### Minor Changes
+
+- ff22578: adapt to module usage
+
 ## 0.0.4
 
 ### Patch Changes
