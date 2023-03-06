@@ -1,15 +1,27 @@
-import { main } from '@/index'
+import { createApi } from '@/index'
 import { CMD } from '@/cmd'
 
 jest.mock('@/cmd')
 
-describe('main()', () => {
-  it('should create CMD instance', async () => {
-    await main()
+describe('createApi()', () => {
+  it('should create CMD instance with param name', async () => {
+    process.argv[2] = 'any-project-name'
+    
+    await createApi()
 
     expect(CMD).toHaveBeenCalledTimes(1)
     expect(CMD).toHaveBeenCalledWith({
-      name: process.argv[2],
+      name: 'any-project-name',
+      root: process.cwd()
+    })
+  })
+
+  it('should create CMD instance with given name', async () => {
+    await createApi('any-project-name')
+
+    expect(CMD).toHaveBeenCalledTimes(1)
+    expect(CMD).toHaveBeenCalledWith({
+      name: 'any-project-name',
       root: process.cwd()
     })
   })
@@ -18,7 +30,7 @@ describe('main()', () => {
     const timeSpy = jest.spyOn(console, 'time')
     const timeEndSpy = jest.spyOn(console, 'timeEnd')
 
-    await main()
+    await createApi()
 
     expect(timeSpy).toHaveBeenCalledTimes(1)
     expect(timeSpy).toHaveBeenCalledWith(expect.any(String))
@@ -36,7 +48,7 @@ describe('main()', () => {
       'formatProject'
     ]
 
-    await main()
+    await createApi()
 
     expect.assertions(requiredMethods.length)
     requiredMethods.forEach(method => {
@@ -57,7 +69,7 @@ describe('main()', () => {
       jest.spyOn(CMD.prototype, method).mockImplementationOnce(async () => {
         throw new Error()
       })
-      await main()
+      await createApi()
     }
 
     expect(CMD.prototype.rollback).toHaveBeenCalledTimes(requiredMethods.length)
