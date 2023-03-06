@@ -6,7 +6,7 @@ jest.mock('@/cmd')
 describe('createApi()', () => {
   it('should create CMD instance with param name', async () => {
     process.argv[2] = 'any-project-name'
-    
+
     await createApi()
 
     expect(CMD).toHaveBeenCalledTimes(1)

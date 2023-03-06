@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { CMD } from './cmd'
 
-export async function createApi(name?: string) {
+export async function createApi(name?: string): Promise<void> {
   const cmd = new CMD({
     name: name ?? process.argv[2],
     root: process.cwd()
@@ -30,3 +30,5 @@ export async function createApi(name?: string) {
 
   console.timeEnd(timeLabel)
 }
+
+void createApi()
