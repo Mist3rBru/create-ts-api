@@ -1,5 +1,11 @@
 # create-ts-api
 
+## 0.1.2
+
+### Patch Changes
+
+- f56efb2: fix: auto execution on module import
+
 ## 0.1.1
 
 ### Patch Changes
