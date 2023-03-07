@@ -5,9 +5,9 @@
   "bin": {
     "create-ts-api": "./dist/index.js"
   },
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "module": "dist/index.mjs",
+  "main": "dist/create-api.js",
+  "types": "dist/create-api.d.ts",
+  "module": "dist/create-api.mjs",
   "author": "Mist3rBru",
   "license": "MIT",
   "homepage": "https://github.com/Mist3rBru/create-ts-api#readme",

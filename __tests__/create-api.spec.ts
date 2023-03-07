@@ -1,4 +1,4 @@
-import { createApi } from '@/index'
+import { createApi } from '@/create-api'
 import { CMD } from '@/cmd'
 
 jest.mock('@/cmd')
