@@ -4,6 +4,8 @@ __tests__/
 coverage/
 bin/
 src/
+my-app/
+my-api/
 
 .editorconfig
 .gitignore
