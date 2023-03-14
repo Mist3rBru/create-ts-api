@@ -1,5 +1,11 @@
 # create-ts-api
 
+## 0.1.3
+
+### Patch Changes
+
+- cca934e: fix: npm ignore
+
 ## 0.1.2
 
 ### Patch Changes
